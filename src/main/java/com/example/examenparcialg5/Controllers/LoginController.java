@@ -36,6 +36,5 @@ public class LoginController {
         session.setAttribute("usuario",usuario);
 
         return "redirect:/producto";
-    }
 
 }
