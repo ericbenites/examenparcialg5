@@ -1,26 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head th:replace="fragments/leftbar.html :: cabecera(titulo='Lista de productos')">
 </head>
 <body>
-<div id="wrapper">
-    <nav th:replace="fragments/leftbar.html :: barrasuperior"></nav>
-    <nav th:replace="fragments/leftbar.html :: barraizquierda"></nav>
+<nav th:replace="fragments/leftbar.html :: navbar"></nav>
 
 
-
-
-    <!-- /. NAV SIDE  -->
     <div id="page-wrapper">
         <div class="header">
             <h1 class="page-header">
                 Lista de Productos
             </h1>
         </div>
-
-
-        <!-- /. COMUNIDAD  -->
         <div id="page-inner">
             <div class="col-xs-4">
                 <form class="header " method="post" th:action="@{'/producto/search'}">
@@ -66,9 +57,6 @@
                                         <td th:text="${producto.getStock()}"></td>
                                         <td ><img th:src="@{${'/img/productoFotos/' + foto.filename}}" alt="Photo upload confirmation"/></td>
 
-
-
-
                                     </tr>
                                     </tbody>
                                 </table>
@@ -102,15 +90,7 @@
                 </div>
             </div>
         </div>
-
     </div>
-</div>
-<!-- /. PAGE WRAPPER  -->
-<!-- /. WRAPPER  -->
-<!-- JS Scripts-->
-
-<div th:replace="fragments/leftbar.html :: scriptsAbajo"></div>
-
 </body>
 
 </html>
