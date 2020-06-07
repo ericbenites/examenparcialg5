@@ -3,11 +3,7 @@
 <head th:replace="fragments/leftbar.html :: cabecera(titulo = 'producto')"></head>
 <body>
 
-<nav th:replace="fragments/leftbar.html :: barrasuperior"></nav>
-
-
-<nav th:replace="fragments/leftbar.html :: barraizquierda( active = 'producto')"></nav>
-
+<nav th:replace="fragments/leftbar.html :: navbar"></nav>
 
 <div id="page-wrapper">
     <h2 class="page-header" th:text="${producto.getIdproducto() == 0? 'Nuevo producto' : 'Editar producto'}">

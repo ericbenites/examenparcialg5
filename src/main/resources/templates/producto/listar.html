@@ -5,11 +5,7 @@
 </head>
 <body>
 <div id="wrapper">
-    <nav th:replace="fragments/leftbar.html :: barrasuperior"></nav>
-    <nav th:replace="fragments/leftbar.html :: barraizquierda"></nav>
-
-
-
+    <nav th:replace="fragments/leftbar.html :: navbar"></nav>
 
     <!-- /. NAV SIDE  -->
     <div id="page-wrapper">
@@ -64,9 +60,6 @@
                                         <td th:text="${producto.getNombreproducto()}"></td>
                                         <td th:text="${producto.getPrecio()}"></td>
                                         <td th:text="${producto.getStock()}"></td>
-
-
-
 
                                     </tr>
                                     </tbody>
