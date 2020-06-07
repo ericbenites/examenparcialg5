@@ -17,6 +17,9 @@ public class Usuario implements Serializable {
     private String dni;
     private String correo;
     private String contrasena;
+
+    private String confirmarcontrasena;
+
     @Column(nullable = true)
     private boolean enable;
     @ManyToOne
@@ -85,5 +88,13 @@ public class Usuario implements Serializable {
 
     public void setRol(Rol rol) {
         this.rol = rol;
+    }
+
+    public String getConfirmarcontrasena() {
+        return confirmarcontrasena;
+    }
+
+    public void setConfirmarcontrasena(String confirmarcontrasena) {
+        this.confirmarcontrasena = confirmarcontrasena;
     }
 }
