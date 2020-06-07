@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/leftbar.html :: cabecera(titulo='Recuperar Contraseña')">
+</head>
+<body>
+<div class="container padding">
+    <div class="card">
+        <div class="col-md-8">
+            <h1>Recuperar Contraseña</h1>
+        </div>
+        <div th:if="${msg != null}" th:text="${msg}" class="alert alert-success"
+             role="alert"></div>
+        <form method="POST" th:action="@{'/email/sendMail'}" class="container">
+
+            <div class="form-group">
+                <label for="email">Correo electrónico</label>
+                <input type="text" class="form-control" id="email" name="email"  style="width: 25%">
+            </div>
+            <a th:href="@{'/loginForm'}" class=" btn btn-info btn-responsive btninter">Cancelar</a>
+            <button type="submit" class=" btn btn-info btn-responsive btninter rigth" >Enviar</button>
+
+        </form>
+    </div>
+</div>
+</body>
+</html>
