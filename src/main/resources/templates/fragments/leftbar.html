@@ -30,21 +30,20 @@
         <li class="nav-item" sec:authorize="hasAnyAuthority('registrado')">
             <a class="nav-link" href="#" th:href="@{/pedidos/list}">Mis pedidos</a>
         </li>
-
-
     </ul>
     <div sec:authorize="isAnonymous()" id="usuarioAnonimo">
-        <a class="btn btn-info" th:href="@{/login}">Iniciar Sesión</a>
+        <a class="btn btn-info" th:href="@{/loginForm}">Iniciar Sesión</a>
     </div>
     <div class="form-inline" sec:authorize="isAuthenticated()" id="usuarioAutenticado">
             <span class="navbar-text mx-2"
-                  th:text="| ${session.usuario.nombre} ${session.usuario.apellido} (${session.usuario.rol.nombre})|">
+                  th:text="|${session.usuario.nombre} ${session.usuario.apellido} (${session.usuario.rol.nombre})|">
                 Bienvenido
             </span>
         <form th:action="@{/logout}" method="post">
             <button type="submit" class="btn btn-info">Cerrar sesión</button>
         </form>
     </div>
+
 </nav>
 
 <div class="alert alert-dismissable" th:fragment="alert(type, message)"
