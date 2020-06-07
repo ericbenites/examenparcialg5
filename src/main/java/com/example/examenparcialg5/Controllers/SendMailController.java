@@ -36,17 +36,37 @@ public class SendMailController {
         if (usuario.isEnable()){
 
             String caracteres = "ABCDEFGHIJKLMNPQRSTUVWXYZ";
-            String random = "";
+            String randomString = "";
             int largoCaracteres = 8;
+
+            String caracteres2 = "1234567890";
+            String randomnumeros = "";
+            int largoCaracteres2 = 2;
+
+            Random random1 = new Random();
+            Random random2 = new Random();
 
             char[] text = new char[largoCaracteres];
 
+            for (int i =0; i < largoCaracteres; i++){
+                text[i] = caracteres.charAt(random1.nextInt(caracteres.length()));
+            }
+            for (int i = 0; i < text.length; i++){
+                randomString += text[i];
+            }
 
+            char[] text2 = new char[largoCaracteres2];
 
-            Random random1 = new Random();
+            for (int i =0; i < largoCaracteres2; i++){
+                text2[i] = caracteres2.charAt(random2.nextInt(caracteres2.length()));
+            }
+            for (int i = 0; i < text2.length; i++){
+                randomnumeros += text2[i];
+            }
 
+            String randompass = randomString + randomnumeros;
 
-            String message = "probando el correo";
+            String message = "Esta es tu nueva contraseña: " + randompass;
             String subject = "recuperar contraseña";
             mailService.sendMail("mijailmontalvo46@gmail.com",email,subject,message);
             attr.addFlashAttribute("msg", "Se le ha enviado a su correo electrónico su\n" +
