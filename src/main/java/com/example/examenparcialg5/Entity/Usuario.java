@@ -1,11 +1,29 @@
 package com.example.examenparcialg5.Entity;
 
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
+
 @Entity
 @Table(name = "usuario")
+@Setter
+@Getter
+@NamedStoredProcedureQueries({@NamedStoredProcedureQuery(name = "registrarusuario",
+        procedureName = "registrarusuario",
+        parameters = {@StoredProcedureParameter(mode = ParameterMode.IN, name = "idusuario", type = int.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "nombre", type = String.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "apellido", type = String.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "dni", type = int.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "correo", type = String.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "contrasena", type = String.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "confirmarcontrasena", type = String.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "enable", type = boolean.class),
+        @StoredProcedureParameter(mode = ParameterMode.IN, name = "rol", type = int.class)})})
+
 public class Usuario implements Serializable {
 
     @Id
@@ -17,14 +35,15 @@ public class Usuario implements Serializable {
     private String dni;
     private String correo;
     private String contrasena;
-
     private String confirmarcontrasena;
-
     @Column(nullable = true)
     private boolean enable;
     @ManyToOne
     @JoinColumn(name = "rol_idrol")
     private Rol rol;
+
+
+
 
     public int getIdusuario() {
         return idusuario;
