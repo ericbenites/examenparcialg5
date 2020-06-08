@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/leftbar.html :: cabecera(titulo='Lista de productos')">
+</head>
+<body>
+<nav th:replace="fragments/leftbar.html :: navbar"></nav>
+
+
+<div id="page-wrapper">
+    <div class="header">
+        <h1 class="page-header">
+            Lista de Productos
+        </h1>
+    </div>
+    <div id="page-inner">
+        <div class="col-xs-4">
+            <form class="header " method="post" th:action="@{'/producto/search'}">
+                <input type="text" class="form-control" placeholder="Texto a buscar" name="search">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-primary " type="submit">Buscar</button>
+                    <a th:href="@{'/producto'}" class="btn btn-outline-danger">Limpiar</a>
+                </div>
+            </form>
+        </div>
+
+
+        <!-- /. COMUNIDAD  -->
+        <div class="row " >
+            <div class="col-md-8 padding">
+                <div class="card">
+                    <div class="card-action">
+                        <a class="btn btn-primary right" th:href="@{'/producto/nuevo'}">agregar</a>
+                    </div>
+                    <div class="card-content">
+                        <div class="table-responsive">
+                            <div th:if="${msg != null}" th:text="${msg}" class="alert alert-success"
+                                 role="alert"></div>
+                            <tr th:each="producto, info : ${listaProductos}">
+                                <div class="container">
+                                    <div th:height="500px" th:width="40px">
+
+                                        <h6 th:text="${producto.getCodigoproducto()}"></h6>
+                                        <h6 th:text="${producto.getNombreproducto()}"></h6>
+                                        <h6 th:text="${producto.getPrecio()}"></h6>
+                                        <h6 th:text="${producto.getStock()}"></h6>
+
+                                        <p>
+                                            <img width="20%" th:if="${listaFotos[info.index] != null  }" th:src="@{${'/img/productoFotos/' + listaFotos[info.index].filename}}" align="rigth"/>
+                                        </p>
+
+
+
+
+                                    </div>
+                                </div>
+                            </tr>
+
+
+
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-8">
+                                <ul th:if="${last != 1}" class="pagination justify-content-center">
+                                    <li class ="page-item" th:if="${current != 1 }">
+
+                                        <a class="page-link" th:href="@{'/producto' + '?page=' + ${prev}} "> Anterior </a>
+                                    </li>
+
+                                    <li class ="page-item" th:each="page:${pages}" th:classappend="${current == page ? 'active' : ''}" >
+
+                                        <a class="page-link" th:href="@{'/producto' + '?page=' + ${page}} " th:text="${page}"  ></a>
+                                    </li>
+
+                                    <li class ="page-item" th:if="${current != last }">
+
+                                        <a class="page-link"  th:href="@{'/producto' + '?page=' + ${next}} "> Siguiente </a>
+                                    </li>
+
+                                </ul>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- End  Kitchen Sink -->
+        </div>
+    </div>
+</div>
+</div>
+</body>
+
+</html>

@@ -1,6 +1,7 @@
 package com.example.examenparcialg5.Entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -21,9 +22,9 @@ public class Producto {
     private String nombreproducto;
 
 
+    @ManyToMany(mappedBy = "listaProductos")
+    List<Pedidos> listaPedidos;
 
-    @Column(name = "foto")
-    private String foto;
 
     @Column(name = "precio")
 
@@ -62,13 +63,6 @@ public class Producto {
         this.nombreproducto = nombreproducto;
     }
 
-    public String getFoto() {
-        return foto;
-    }
-
-    public void setFoto(String foto) {
-        this.foto = foto;
-    }
 
     public Double getPrecio() {
         return precio;
@@ -93,5 +87,6 @@ public class Producto {
     public void setDescripcionproducto(String descripcionproducto) {
         this.descripcionproducto = descripcionproducto;
     }
+
 }
 
