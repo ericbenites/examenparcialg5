@@ -61,7 +61,7 @@ public class UsuarioController {
             model.addAttribute("usuario", usuario);
             return "Usuario/form";
         } else {
-            return"redirect: /usuario/lista";
+            return"redirect: /usuario/listar";
         }
     }
 

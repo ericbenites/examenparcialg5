@@ -55,9 +55,6 @@ public class Usuario implements Serializable {
     @JoinColumn(name = "rol_idrol")
     private Rol rol;
 
-
-
-
     public int getIdusuario() {
         return idusuario;
     }

@@ -43,9 +43,9 @@
                                             <h3 th:text="${producto.getNombreproducto()}"></h3>
                                             <h3 th:text="${producto.getPrecio()}"></h3>
                                             <h3 th:text="${producto.getStock()}"></h3>
+                                            <a th:href="@{'/redirectByRol'}" class=" btn btn-info btn-responsive btninter"> Ver Más</a>
+                                            <a th:href="@{'/loginForm'}" class=" btn btn-info btn-responsive btninter">Agregar al Carrito</a>
                                             <img th:if="${listaFotos[info.index] != null  }" th:src="@{${'/img/productoFotos/' + listaFotos[info.index].filename}}" alt="Photo upload confirmation"/>
-
-
 
                                         </div>
                                     </div>
