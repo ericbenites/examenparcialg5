@@ -2,6 +2,8 @@ package com.example.examenparcialg5.Entity;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
+
 
 @Entity
 @Table(name = "pedidos")
@@ -14,14 +16,16 @@ public class Pedidos {
 
     private String codigopedido;
 
-    private int totalpagado;
+    private Double totalpagado;
 
     private Date fechacompra;
 
-    @ManyToOne
-    @JoinColumn(name = "producto_idproducto")
-    private Producto producto;
-
+    @ManyToMany
+    @JoinTable(
+            name = "producto_has_pedidos",
+            joinColumns = @JoinColumn(name = "pedidos_idpedidos"),
+            inverseJoinColumns = @JoinColumn(name = "producto_idproducto"))
+    private List<Producto> listaProductos;
     public int getIdPedidos() {
         return idPedidos;
     }
@@ -38,11 +42,11 @@ public class Pedidos {
         this.codigopedido = codigopedido;
     }
 
-    public int getTotalpagado() {
+    public Double getTotalpagado() {
         return totalpagado;
     }
 
-    public void setTotalpagado(int totalpagado) {
+    public void setTotalpagado(Double totalpagado) {
         this.totalpagado = totalpagado;
     }
 
@@ -54,11 +58,5 @@ public class Pedidos {
         this.fechacompra = fechacompra;
     }
 
-    public Producto getProducto() {
-        return producto;
-    }
 
-    public void setProducto(Producto producto) {
-        this.producto = producto;
-    }
 }

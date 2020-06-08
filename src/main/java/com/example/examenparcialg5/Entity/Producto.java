@@ -1,6 +1,7 @@
 package com.example.examenparcialg5.Entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -20,6 +21,9 @@ public class Producto {
 
     private String nombreproducto;
 
+
+    @ManyToMany(mappedBy = "listaProductos")
+    List<Pedidos> listaPedidos;
 
 
     @Column(name = "precio")
