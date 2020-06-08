@@ -1,5 +1,7 @@
 package com.example.examenparcialg5.Controllers;
 
+import com.example.examenparcialg5.Entity.Pedidos;
+import com.example.examenparcialg5.Entity.Producto;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,16 +10,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+
 @Controller
 @RequestMapping("/pago")
 public class PagoController {
 
 
     @GetMapping(value = {"","/"})
-    public String ventanaPago(){return "checkout/tarjeta";}
+    public String ventanaPago(){return "checkout";}
 
     @PostMapping
-    public String validarTarjeta(@RequestParam("tarjeta") String tarjeta, Model model, RedirectAttributes attr){
+    public String validarTarjeta(@RequestParam("tarjeta") String tarjeta, Model model, RedirectAttributes attr, HttpSession session, Pedidos pedidos){
 
 
         int s1 = 0, s2 = 0;
@@ -54,7 +61,17 @@ public class PagoController {
         int verif = (10 - (suma%10))%10;
 
         if (verif == digitoverificador){
+            Calendar fecha = Calendar.getInstance();
+            int año = fecha.get(Calendar.YEAR);
+            int mes = fecha.get(Calendar.MONTH) + 1;
+            int dia = fecha.get(Calendar.DAY_OF_MONTH);
 
+
+            ArrayList<Producto> productoCarrito = (ArrayList<Producto>) session.getAttribute("productosCarritoDeCompras");
+
+
+            pedidos.setListaProductos(productoCarrito);
+            pedidos.setFechacompra(new Date());
 
             attr.addFlashAttribute("msg1", "Compra exitosa");
 

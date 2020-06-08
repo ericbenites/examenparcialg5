@@ -15,9 +15,6 @@ import java.util.ArrayList;
 
 @Controller
 public class LoginController {
-
-    private final UsuarioRepository usuarioRepository;
-
     @Autowired
     public LoginController(UsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
@@ -45,6 +42,8 @@ public class LoginController {
         session.setAttribute("usuario", usuario);
         ArrayList<Producto> productosCarritoDeCompras = new ArrayList<>();
         session.setAttribute("productosCarritoDeCompras",productosCarritoDeCompras);
+        Double totalPagar = null;
+        session.setAttribute("totalPagar", totalPagar);
 
         return "redirect:/producto";
 
