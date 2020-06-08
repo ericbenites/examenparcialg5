@@ -16,7 +16,7 @@ public class UsuarioController {
     @Autowired
     UsuarioRepository usuarioRepository;
 
-    @GetMapping(value = {" ", "/"})
+    @GetMapping(value = {"", "/"})
     public String nuevo (){
 
         return "usuario/nuevo";

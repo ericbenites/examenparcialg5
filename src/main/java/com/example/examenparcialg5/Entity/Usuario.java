@@ -1,11 +1,15 @@
 package com.example.examenparcialg5.Entity;
 
 
+
+
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+//import javax.validation.constraints.*;
+
 
 
 @Entity
@@ -30,10 +34,19 @@ public class Usuario implements Serializable {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idusuario;
+    //    @NotBlank(message = "El nombre no debe ser vacío")
+//    @Pattern(regexp="[a-zA-Z ]{2,40}",message = "Solo aceptan letras")
     private String nombre;
+//    @NotBlank(message = "El nombre no debe ser vacío")
+//    @Pattern(regexp="[a-zA-Z ]{2,40}",message = "Solo aceptan letras")
     private String apellido;
+    //@NotBlank(message = "El DNI no debe ser vacío")
+    //@Pattern(regexp = "[0-9]{8}" ,message = "Solo se aceptan numeros")
     private String dni;
+//    @NotBlank(message = "el correo no debe ser vacio")
+//    @Email(message = "ingrese un correo válido")
     private String correo;
+
     private String contrasena;
     private String confirmarcontrasena;
     @Column(nullable = true)
