@@ -55,7 +55,7 @@
                                         <td th:text="${producto.getNombreproducto()}"></td>
                                         <td th:text="${producto.getPrecio()}"></td>
                                         <td th:text="${producto.getStock()}"></td>
-                                        <td ><img th:src="@{${'/img/productoFotos/' + foto.filename}}" alt="Photo upload confirmation"/></td>
+                                      <img th:if="${foto.filename != null }" th:src="@{${'/img/productoFotos/' + foto.filename}}" alt="Photo upload confirmation"/>
 
                                     </tr>
                                     </tbody>

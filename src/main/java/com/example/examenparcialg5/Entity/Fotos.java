@@ -15,7 +15,8 @@ public class Fotos {
 
     private String path;
     private String filename;
-    @ManyToOne
+
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "producto_idproducto")
     private Producto producto;
 

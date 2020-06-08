@@ -4,6 +4,7 @@ package com.example.examenparcialg5.Controllers;
 import com.example.examenparcialg5.Dto.ProductoServiceApi;
 import com.example.examenparcialg5.Entity.Fotos;
 import com.example.examenparcialg5.Entity.Producto;
+import com.example.examenparcialg5.Repository.FotoRepository;
 import com.example.examenparcialg5.Repository.ProductoRepository;
 import com.example.examenparcialg5.service.ProductoService;
 import org.slf4j.Logger;
@@ -35,6 +36,8 @@ import java.util.stream.IntStream;
 @Controller
 @RequestMapping("/producto")
 public class ProductoController {
+    @Autowired
+    FotoRepository fotoRepository;
 
     @Autowired
     ProductoServiceApi productoServiceApi;
@@ -46,10 +49,10 @@ public class ProductoController {
 
     Logger log = LoggerFactory.getLogger(this.getClass());
     @GetMapping(value = {"", "/"})
-    public String listaProducto(@RequestParam Map<String, Object> params, Model model) {
+    public ModelAndView listaProducto(@RequestParam Map<String, Object> params) {
+        ModelAndView modelAndView = new ModelAndView();
 
-
-
+        Fotos foto = new Fotos();
         int page = params.get("page") != null ? (Integer.valueOf(params.get("page").toString()) - 1) : 0;
 
         PageRequest pageRequest = PageRequest.of(page, 7);
@@ -59,16 +62,18 @@ public class ProductoController {
         int totalPage = pageProduct.getTotalPages();
         if (totalPage > 0) {
             List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
-            model.addAttribute("pages", pages);
+            modelAndView.addObject("pages", pages);
         }
 
-        model.addAttribute("listaProductos", pageProduct.getContent());
-        model.addAttribute("current", page + 1);
-        model.addAttribute("next", page + 2);
-        model.addAttribute("prev", page);
-        model.addAttribute("last", totalPage);
+        modelAndView.addObject("listaProductos", pageProduct.getContent());
+        modelAndView.addObject("listaFotos",fotoRepository.findAll()) ;
+        modelAndView.addObject("current", page + 1);
+        modelAndView.addObject("next", page + 2);
+        modelAndView.addObject("prev", page);
+        modelAndView.addObject("last", totalPage);
 
-        return "producto/listar";
+        modelAndView.setViewName("index");
+        return modelAndView;
     }
 
 
@@ -78,84 +83,56 @@ public class ProductoController {
     }
 
     @PostMapping(value = "/guardar")
-    public ModelAndView guardarProducto(@RequestParam("imageFile") MultipartFile  imageFile , Producto producto, RedirectAttributes attr) throws IOException {
-        ModelAndView modelAndView = new ModelAndView();
+    public String guardarProducto(@RequestParam("imageFile") MultipartFile  imageFile ,Fotos foto , Producto producto, RedirectAttributes attr) {
+
 
 
         if (producto.getIdproducto() == 0) {
-          try {
               productoRepository.save(producto);
-          } catch (Exception e) {
 
-              log.error("No se puede guardar el producto", e);
-              e.printStackTrace();
-              modelAndView.setViewName("error");
-              return modelAndView;
-          }
 
-              Fotos foto = new Fotos();
+
               foto.setPath("/img/productoFotos/");
               foto.setFilename(imageFile.getOriginalFilename());
-              if (!(imageFile.getOriginalFilename().endsWith(".png") || imageFile.getOriginalFilename().endsWith(".jpg") || imageFile.getOriginalFilename().endsWith(".jpeg"))){
+              if (!(foto.getFilename().endsWith(".png") || foto.getFilename().endsWith(".jpeg") ||foto.getFilename().endsWith(".jpg"))){
                   attr.addFlashAttribute("msg1", "Only PNG , JPG and JPEG images are allowed");
-                    modelAndView.setViewName("producto/editFrm");
-                    return modelAndView;}
 
-              File f = new File("C://TEMP//" + imageFile.getOriginalFilename());
-              f.createNewFile();
-              FileOutputStream fout = new FileOutputStream(f);
-              fout.write(imageFile.getBytes());
-              fout.close();
-              BufferedImage image = ImageIO.read(f);
+                    return "redirect:/producto/nuevo";}
 
-              int height = image.getHeight();
-              int width = image.getWidth();
-              if(width > 135 || height>135) {
-                  attr.addFlashAttribute("msg2", "No son válidas imágenes mayor que 135 x 135 px");
-                  modelAndView.setViewName("producto/editFrm");
-                  return modelAndView;
-              }
+
                   foto.setProducto(producto);
+            fotoRepository.save(foto);
             attr.addFlashAttribute("msg", "Producto creado exitosamente");
-              modelAndView.setViewName("producto/listar");
-              try {
-                  productoService.saveImage(imageFile,foto);
-              } catch (Exception e) {
-                  e.printStackTrace();
-                  log.error("Error guardando foto" , e);
-                  modelAndView.setViewName("error");
-                  return modelAndView;
-              }
-            modelAndView.addObject("foto", foto);
-            modelAndView.addObject("producto", producto);
-            return modelAndView;
+
+
+
+
+            return "redirect:/producto";
 
 
         } else {
             attr.addFlashAttribute("msg", "Producto actualizado exitosamente");
             productoRepository.save(producto);
-            modelAndView.setViewName("producto/listar");
+            return "redirect:/producto";
         }
-       return modelAndView;
+
 
 
     }
 
     @PostMapping("/uploadImage")
     public String uploadImage(@RequestParam("imageFile") MultipartFile imageFile) {
-        String returnValue = "producto/editFrm";
+        String returnValue = "redirect:/producto";
 
         Fotos foto = new Fotos();
         foto.setFilename(imageFile.getOriginalFilename());
-        foto.setPath("/photo/");
+        foto.setPath("/img/productoFotos/");
 
         try {
             productoService.saveImage(imageFile, foto);
         } catch (Exception e) {
-            // TODO Auto-generated catch block
+
             e.printStackTrace();
-            log.error("Error saving photo", e);
-            returnValue = "error";
         }
 
         return returnValue;

@@ -3,7 +3,6 @@ package com.example.examenparcialg5.service;
 
 
 
-import com.example.examenparcialg5.Dao.FotoDao;
 import com.example.examenparcialg5.Dto.ProductoServiceApi;
 import com.example.examenparcialg5.Entity.Fotos;
 import com.example.examenparcialg5.Entity.Producto;
@@ -15,11 +14,15 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.examenparcialg5.Dao.IFotoDao;
+
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 @Component
 public class ProductoService implements ProductoServiceApi {
 
-    FotoDao fotoDao;
 
 
     @Autowired
@@ -37,8 +40,12 @@ public class ProductoService implements ProductoServiceApi {
 
     @Override
     public void saveImage(MultipartFile imageFile, Fotos foto) throws Exception {
-        fotoDao.saveFotoImage(foto , imageFile);
-        fotoDao.save(foto);
+        Path currentPath = Paths.get(".");
+        Path absolutePath = currentPath.toAbsolutePath();
+        foto.setPath(absolutePath + "/src/main/resources/static/img/productoFotos/");
+        byte[] bytes = imageFile.getBytes();
+        Path path = Paths.get(foto.getPath() + imageFile.getOriginalFilename());
+        Files.write(path, bytes);
     }
 
 
