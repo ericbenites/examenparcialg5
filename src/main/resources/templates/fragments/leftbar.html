@@ -27,10 +27,11 @@
     <ul class="navbar-nav">
         <a class="navbar-brand" href="#" th:href="@{/}">LA BATI</a>
 
-        <li class="nav-item" sec:authorize="hasAnyAuthority('registrado')">
+        <li class="nav-item" sec:authorize="hasAuthority('registrado')">
             <a class="nav-link" href="#" th:href="@{/pedidos/list}">Mis pedidos</a>
         </li>
     </ul>
+
     <div sec:authorize="isAnonymous()" id="usuarioAnonimo">
         <a class="btn btn-info" th:href="@{/loginForm}">Iniciar Sesión</a>
     </div>
@@ -42,8 +43,8 @@
         <form th:action="@{/logout}" method="post">
             <button type="submit" class="btn btn-info">Cerrar sesión</button>
         </form>
-
     </div>
+
 
 </nav>
 

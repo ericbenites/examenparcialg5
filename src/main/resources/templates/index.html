@@ -35,21 +35,30 @@
                         <div class="table-responsive">
                             <div th:if="${msg != null}" th:text="${msg}" class="alert alert-success"
                                  role="alert"></div>
-
                             <tr th:each="producto, info : ${listaProductos}">
                                 <div class="container">
-                                    <div th:height="1200px" th:width="800px">
-                                        <h3 th:text="${( info.index +1) + (prev)*7}"></h3>
-                                        <h3 th:text="${producto.getCodigoproducto()}"></h3>
-                                        <h3 th:text="${producto.getNombreproducto()}"></h3>
-                                        <h3 th:text="${producto.getPrecio()}"></h3>
-                                        <h3 th:text="${producto.getStock()}"></h3>
-                                        <img th:if="${foto.filename != null }" th:src="@{${'/img/productoFotos/' + foto.filename}}" alt="Photo upload confirmation"/>
+                                    <div th:height="500px" th:width="40px">
+
+                                        <h6 th:text="${producto.getCodigoproducto()}"></h6>
+                                        <h6 th:text="${producto.getNombreproducto()}"></h6>
+                                        <h6 th:text="${producto.getPrecio()}"></h6>
+                                        <h6 th:text="${producto.getStock()}"></h6>
+
+                                        <p>
+                                            <img width="20%" th:if="${listaFotos[info.index] != null  }" th:src="@{${'/img/productoFotos/' + listaFotos[info.index].filename}}" align="rigth"/>
+                                        </p>
+
+
+
+
                                     </div>
                                 </div>
                             </tr>
-                        </div>
 
+
+
+
+                        </div>
                         <div class="row">
                             <div class="col-md-4"></div>
                             <div class="col-md-8">
@@ -84,8 +93,4 @@
 </div>
 </body>
 
-</html>
-
-</div>
-</body>
 </html>
