@@ -27,6 +27,7 @@ public class LoginController {
         return "login/login";
     }
 
+
     @GetMapping("/redirectByRol")
     public String redirectByRol(Authentication authentication, HttpSession session) {
         String rol = "";
@@ -39,6 +40,7 @@ public class LoginController {
         session.setAttribute("usuario", usuario);
 
         return "redirect:/producto";
+
 
     }
 

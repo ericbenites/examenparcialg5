@@ -32,6 +32,7 @@
         </li>
     </ul>
 
+
     <div sec:authorize="isAnonymous()" id="usuarioAnonimo">
         <a class="btn btn-info" th:href="@{/loginForm}">Iniciar Sesión</a>
     </div>
@@ -43,6 +44,7 @@
         <form th:action="@{/logout}" method="post">
             <button type="submit" class="btn btn-info">Cerrar sesión</button>
         </form>
+
     </div>
 
 
