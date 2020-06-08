@@ -29,19 +29,6 @@ public class UsuarioController {
     @Autowired
     UsuarioRepository usuarioRepository;
 
-    @GetMapping(value = {"", "/"})
-    public String nuevo (){
-
-        return "usuario/nuevo";
-    }
-
-
-    @PostMapping("/registrar")
-    public String registrarUsuario(){
-
-//        usuarioRepository.registrarusuario();
-
-        return "algunavista";
 
 @Autowired
     ProductoRepository productoRepository;

@@ -16,7 +16,6 @@ import java.util.ArrayList;
 @Controller
 public class LoginController {
 
-    private final UsuarioRepository usuarioRepository;
 
     @Autowired
     public LoginController(UsuarioRepository usuarioRepository) {
