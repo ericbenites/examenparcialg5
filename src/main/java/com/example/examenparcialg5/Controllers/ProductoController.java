@@ -64,7 +64,7 @@ public class ProductoController {
         modelAndView.addObject("prev", page);
         modelAndView.addObject("last", totalPage);
 
-        modelAndView.setViewName("index");
+        modelAndView.setViewName("producto/index");
         return modelAndView;
     }
 
@@ -129,6 +129,73 @@ public class ProductoController {
 
         return returnValue;
     }
+
+    @PostMapping("/search")
+    public ModelAndView buscarProducto(String busca,@RequestParam Map<String, Object> params, Model model) {
+        ModelAndView modelAndView = new ModelAndView();
+        String busqueda = (String) params.get("search");
+
+        PageRequest pageRequest;
+
+        Page<Producto> pageProduct;
+        int totalPage;
+        int page = params.get("page") != null ? (Integer.valueOf(params.get("page").toString()) - 1) : 0;
+
+
+
+
+
+        pageRequest = PageRequest.of(page, 10);
+        pageProduct = productoServiceApi.getEver(busqueda, pageRequest);
+        totalPage = pageProduct.getTotalPages();
+        if (totalPage > 0) {
+            List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
+            model.addAttribute("pages", pages);
+        }
+
+        modelAndView.addObject("busqueda", busqueda);
+        modelAndView.addObject("listaProductos", pageProduct.getContent());
+        modelAndView.addObject("listaFotos",fotoRepository.findAll()) ;
+        modelAndView.addObject("current", page + 1);
+        modelAndView.addObject("next", page + 2);
+        modelAndView.addObject("prev", page);
+        modelAndView.addObject("last", totalPage);
+
+        modelAndView.setViewName("producto/index");
+        return modelAndView;
+    }
+    @GetMapping("/search")
+    public ModelAndView buscarProducto(@RequestParam Map<String, Object> params, Model model) {
+        ModelAndView modelAndView = new ModelAndView();
+        String busqueda = (String) params.get("search");
+
+        PageRequest pageRequest;
+
+        Page<Producto> pageProduct;
+        int totalPage;
+        int page = params.get("page") != null ? (Integer.valueOf(params.get("page").toString()) - 1) : 0;
+
+
+        pageRequest = PageRequest.of(page, 10);
+        pageProduct = productoServiceApi.getEver(busqueda, pageRequest);
+        totalPage = pageProduct.getTotalPages();
+        if (totalPage > 0) {
+            List<Integer> pages = IntStream.rangeClosed(1, totalPage).boxed().collect(Collectors.toList());
+            model.addAttribute("pages", pages);
+        }
+
+        modelAndView.addObject("busqueda", busqueda);
+        modelAndView.addObject("listaProductos", pageProduct.getContent());
+        modelAndView.addObject("listaFotos",fotoRepository.findAll()) ;
+        modelAndView.addObject("current", page + 1);
+        modelAndView.addObject("next", page + 2);
+        modelAndView.addObject("prev", page);
+        modelAndView.addObject("last", totalPage);
+
+        modelAndView.setViewName("producto/index");
+        return modelAndView;
+    }
+
 
 }
 

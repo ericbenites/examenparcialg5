@@ -68,8 +68,13 @@ public class PagoController {
 
 
             ArrayList<Producto> productoCarrito = (ArrayList<Producto>) session.getAttribute("productosCarritoDeCompras");
-
-
+            int incre = 1 ;
+            String stringIncre = String.valueOf(incre);
+            String stringAño = String.valueOf(año);
+            String stringMes = String.valueOf(mes);
+            String stringDia = String.valueOf(dia);
+            pedidos.setCodigopedido("PE"+ stringDia + stringMes + stringAño + " " );
+            // Pensaba en tener el incre en sesión y cada vez que haya un cambio en el carrito de 0 a 1 (desde la primea vez) se incremente 1 el incre  l
             pedidos.setListaProductos(productoCarrito);
             pedidos.setFechacompra(new Date());
 

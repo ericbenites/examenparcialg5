@@ -24,7 +24,7 @@
                             <input type="hidden" th:field="*{idproducto}"/>
 
 
-                            <div class="form-group">
+                            <div th:if="${producto.idproducto == 0}" class="form-group">
                                 <label for="codigoproducto">Codigo</label>
                                 <input type="text" class="form-control" th:field="*{codigoproducto}" style="width: 25%">
                                 <div class="text-danger" th:if="${#fields.hasErrors('codigoproducto')}" th:errors="*{codigoproducto}"></div>
@@ -40,7 +40,7 @@
                                 <input type="text" class="form-control" th:field="*{descripcionproducto}" style="width: 25%">
                                 <div class="text-danger" th:if="${#fields.hasErrors('descripcionproducto')}" th:errors="*{descripcionproducto}"></div>
                             </div>
-                            <div class="form-group">
+                            <div th:if="${producto.idproducto == 0}" class="form-group">
                                 <label for="precio">Precio</label>
                                 <input type="text" class="form-control" th:field="*{precio}" style="width: 25%">
                                 <div class="text-danger" th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"></div>
@@ -52,7 +52,7 @@
                             </div>
 
                             <div>
-                                <input th:text="${producto.idproducto == 0}" type = "file" name ="imageFile">
+                                <input th:if="${producto.idproducto == 0}" type = "file" name ="imageFile">
 
                             </div>
 
