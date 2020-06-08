@@ -4,6 +4,7 @@ package com.example.examenparcialg5.Controllers;
 import com.example.examenparcialg5.Repository.UsuarioRepository;
 
 import com.example.examenparcialg5.Entity.Producto;
+import com.example.examenparcialg5.Entity.Usuario;
 import com.example.examenparcialg5.Repository.ProductoRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -52,6 +54,13 @@ public class UsuarioController {
         return "redirect:/producto";
 
     }
+    @GetMapping("/comprar")
+    public String preCompraJuegos(HttpSession session){
+        return "user/compra";
+    }
+
+
+
 
 
 }
