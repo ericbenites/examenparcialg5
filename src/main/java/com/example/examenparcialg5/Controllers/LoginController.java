@@ -27,8 +27,6 @@ public class LoginController {
         return "login/login";
     }
 
-    @Autowired
-    UsuarioRepository usuarioRepository;
 
 
     @GetMapping("/redirectByRol")

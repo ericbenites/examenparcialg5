@@ -44,7 +44,8 @@ public class Usuario implements Serializable {
     //@Pattern(regexp = "[0-9]{8}" ,message = "Solo se aceptan numeros")
     private String dni;
 //    @NotBlank(message = "el correo no debe ser vacio")
-//    @Email(message = "ingrese un correo válido")
+//@Pattern(regexp="^([a-zA-Z0-9\\-\\.\\_]+)'+'(\\@)([a-zA-Z0-9\\-\\.]+)'+'(\\.)([a-zA-Z]{2,4})$")
+ //@Email(message = "ingrese un correo válido")
     private String correo;
 
     private String contrasena;

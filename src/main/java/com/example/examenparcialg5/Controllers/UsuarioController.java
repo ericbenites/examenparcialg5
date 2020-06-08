@@ -33,13 +33,13 @@ public class UsuarioController {
         return "usuario/nuevo";
     }
 
-
     @PostMapping("/registrar")
-    public String registrarUsuario(){
+    public String registrarUsuario() {
 
-//        usuarioRepository.registrarusuario();
+
 
         return "algunavista";
+    }
 
 @Autowired
     ProductoRepository productoRepository;
