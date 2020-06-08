@@ -74,6 +74,11 @@ public class ProductoController {
         return "producto/editFrm";
     }
 
+    @PostMapping("/verMas")
+    public String verMasFrm(Model model, @ModelAttribute("producto") Producto producto) {
+        return "producto/verMas";
+    }
+
     @PostMapping(value = "/guardar")
     public String guardarProducto(@RequestParam("imageFile") MultipartFile  imageFile ,Fotos foto , Producto producto, RedirectAttributes attr) {
 
