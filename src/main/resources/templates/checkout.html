@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/leftbar.html :: cabecera(titulo='Checkout')">
+</head>
+<body>
+<nav th:replace="fragments/leftbar.html :: navbar"></nav>
+
+
+<div id="page-wrapper">
+    <div class="header">
+        <h1 class="page-header">
+            CHECKOUT
+        </h1>
+    </div>
+    <div id="page-inner">
+        <div class="col-xs-4">
+
+            <div class="form-group">
+                <span th:text="|Total a pagar |">${session.totalPagar}</span>
+            </div>
+
+            <div class="form-group">
+                <label for="tarjeta">Datos de pago</label>
+                <span>Tarjeta de credito</span>
+
+            <input type="text" class="form-control" placeholder="tarjeta" id="tarjeta" name="tarjeta"  aria-describedby="basic-addon1">
+        </div>
+        </div>
+
+
+        <!-- /. COMUNIDAD  -->
+
+            <!-- End  Kitchen Sink -->
+        </div>
+    </div>
+</div>
+</div>
+</body>
+
+</html>
