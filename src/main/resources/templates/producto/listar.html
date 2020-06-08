@@ -31,6 +31,7 @@
                         <div class="card-action">
                             <a class="btn btn-primary right" th:href="@{'/producto/nuevo'}">agregar</a>
                         </div>
+                        <div th:if="${msg1 != null}" th:text="${msg1}" class="alert alert-success" role="alert"></div>
                         <div class="card-content">
                             <div class="table-responsive">
                                 <div th:if="${msg != null}" th:text="${msg}" class="alert alert-success"

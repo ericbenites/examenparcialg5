@@ -1,6 +1,7 @@
 package com.example.examenparcialg5.Repository;
 
 import com.example.examenparcialg5.Entity.Pedidos;
+import com.example.examenparcialg5.Entity.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -14,5 +15,6 @@ public interface PedidoRepository extends JpaRepository <Pedidos, Integer> {
     int  obtenertotalfacturado();
 
     //falto agregar la columna de cantidad por produc
+
 
 }

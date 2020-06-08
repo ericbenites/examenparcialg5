@@ -48,7 +48,9 @@
                                             <img width="20%" th:if="${listaFotos[info.index] != null  }" th:src="@{${'/img/productoFotos/' + listaFotos[info.index].filename}}" align="rigth"/>
                                         </p>
 
-
+                                        <td>
+                                            <a class="update" title="Select" th:href="@{'/usuario/anadirCarrito?id=' + ${producto.idproducto} }"> Agreagar al carrito </a>
+                                        </td>
 
 
                                     </div>

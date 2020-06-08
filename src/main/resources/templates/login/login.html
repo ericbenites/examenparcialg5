@@ -19,6 +19,7 @@
         <div align="center">
             <h5 th:if="${param.error}" class="alert alert-danger" style="color:red">Acceso Denegado</h5>
         </div>
+        <div th:if="${msg1 != null}" th:text="${msg1}" class="alert alert-success" role="alert"></div>
         <div class="container">
             <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" name="correo">
         </div>
