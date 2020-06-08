@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment.html :: cabecera"> </head>
+<body>
+<div th:replace="fragment.html :: navbar"></div>
+</div>
+<br>
+<div class="row-fluid" style=" width: 80%; padding:0 10%;">
+
+    <div class="span10">
+        <form th:if="${session.productoCarritoDeCompras.size() > 0}" class="form-horizontal" th:action="@{/user/comprar}" method="post">
+            <table class="items table table-bordered">
+                <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Precio</th>
+                    <th>Genero</th>
+                    <th>Plataforma</th>
+                    <th>Editora</th>
+                    <th>Distribuidora</th>
+                </tr>
+
+                </thead>
+                <tbody>
+                <tr th:each="producto : ${session.productosCarritoDeCompras}">
+                    <th th:text="${producto.getCodigoproducto()}"></th>
+                    <th th:text="${producto.getNombreproducto()}"></th>
+                    <th th:text="${producto.precio}"></th>
+
+
+                </tr>
+                </tbody>
+            </table>
+            <div class="control-group">
+                <div class="controls">
+                    <input class="btn btn-success pull-right" type="submit" value="Comprar"/>
+                </div>
+            </div>
+            <input type="hidden" name="games" value="" >
+        </form>
+        <h2 th:unless="${session.productosCarritoDeCompras.size() >0}">Su carrito de compras está vacío</h2>
+    </div>
+</div>
+
+</body>
+</html>
