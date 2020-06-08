@@ -27,20 +27,31 @@ public class UsuarioController {
 
 
 
-@Autowired
+    @Autowired
     ProductoRepository productoRepository;
+
+    @GetMapping(value = {"", "/"})
+    public String nuevo (){
+
+        return "usuario/nuevo";
+    }
+
+
     @GetMapping("/anadirCarrito")
     public String anadirCarrito(@RequestParam("id") int idProducto, HttpSession session){
         ArrayList<Producto> productoCarrito = (ArrayList<Producto>) session.getAttribute("productosCarritoDeCompras");
         Optional<Producto> producto = productoRepository.findById(idProducto);
+
         productoCarrito.add(producto.get());
         session.setAttribute("productoCarritoDeCompras",productoCarrito);
+
         return "redirect:/producto";
 
     }
     @GetMapping("/comprar")
     public String preCompraJuegos(HttpSession session){
-        return "user/compra";
+
+        return "usuario/compra";
     }
 
 
