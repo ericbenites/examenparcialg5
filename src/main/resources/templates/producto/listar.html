@@ -33,40 +33,20 @@
                         </div>
                         <div class="card-content">
                             <div class="table-responsive">
-                                <div th:if="${msgAr != null}" th:text="${msgAr}" class="alert alert-success"
+                                <div th:if="${msg != null}" th:text="${msg}" class="alert alert-success"
                                      role="alert"></div>
                                 <table class="table">
                                     <tbody>
-                                    <tr th:each="producto : ${listaProductos}">
 
-                                <div class="container py-5">
-                                    <div class="row text-center text-white mb-5">
-                                        <div class="col-lg-7 mx-auto">
-                                            <h1 class="display-4">Product List</h1>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-8 mx-auto">
-                                            <!-- List group-->
-                                            <ul class="list-group shadow">
-                                                <!-- list group item-->
-                                                <li class="list-group-item">
-                                                    <!-- Custom content-->
-                                                    <div class="media align-items-lg-center flex-column flex-lg-row p-3">
-                                                        <div class="media-body order-2 order-lg-1">
-                                                            <h5 class="mt-0 font-weight-bold mb-2" th:text="${producto.codigoproducto}">ABC</h5>
-                                                            <p class="mt-0 font-weight-bold mb-2" th:text="${producto.nombreproducto}">Nombre Producto</p>
-                                                            <p class="mt-0 font-weight-bold mb-2" th:text="${producto.precio}">Precio</p>
-                                                            <p class="mt-0 font-weight-bold mb-2" th:text="${producto.stock}">Stcok</p>
+                                    <tr th:each="producto, info : ${listaProductos}">
+                                        <td th:text="${( info.index +1) + (prev)*7}"></td>
+                                        <td th:text="${producto.getCodigoproducto()}"></td>
+                                        <td th:text="${producto.getNombreproducto()}"></td>
+                                        <td th:text="${producto.getPrecio()}"></td>
+                                        <td th:text="${producto.getStock()}"></td>
+                                      <img th:if="${foto.filename != null }" th:src="@{${'/img/productoFotos/' + foto.filename}}" alt="Photo upload confirmation"/>
+                                    </tr>
 
-                                                        </div>
-                                                    </div> <!-- End -->
-                                                </li> <!-- End -->
-
-                                            </ul> <!-- End -->
-                                        </div>
-                                    </div>
-                                </div>
                                     </tbody>
                                 </table>
                                 <div class="row">

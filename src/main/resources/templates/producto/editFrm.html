@@ -15,9 +15,20 @@
                 <div class="card">
                     <div class="container padding ">
 
+                        <div th:if="${msg1 != null}" th:text="${msg1}" class="alert alert-success"
+                             role="alert"></div>
+                        <div th:if="${msg2 != null}" th:text="${msg1}" class="alert alert-success"
+                             role="alert"></div>
 
-                        <form method="post" th:action="@{'/producto/guardar'}" enctype="multipart/form-data"  th:object="${producto}">
+                        <form method="post" th:action="@{'/producto/uploadImage'}" enctype="multipart/form-data"  th:object="${producto}">
                             <input type="hidden" th:field="*{idproducto}"/>
+
+
+                            <div class="form-group">
+                                <label for="codigoproducto">Codigo</label>
+                                <input type="text" class="form-control" th:field="*{codigoproducto}" style="width: 25%">
+                                <div class="text-danger" th:if="${#fields.hasErrors('codigoproducto')}" th:errors="*{codigoproducto}"></div>
+                            </div>
 
                             <div class="form-group">
                                 <label for="nombreproducto">Nombre producto</label>
@@ -39,9 +50,10 @@
                                 <input type="text" class="form-control" th:field="*{stock}" style="width: 25%">
                                 <div class="text-danger" th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}"></div>
                             </div>
+
                             <div>
-                                <input tyoe = "file" name ="imageFile">
-                                <input type = "submit" value = "upload">
+                                <input th:text="${producto.idproducto == 0}" type = "file" name ="imageFile">
+
                             </div>
 
 

@@ -22,9 +22,6 @@ public class Producto {
 
 
 
-    @Column(name = "foto")
-    private String foto;
-
     @Column(name = "precio")
 
     private Double precio;
@@ -62,13 +59,6 @@ public class Producto {
         this.nombreproducto = nombreproducto;
     }
 
-    public String getFoto() {
-        return foto;
-    }
-
-    public void setFoto(String foto) {
-        this.foto = foto;
-    }
 
     public Double getPrecio() {
         return precio;
@@ -93,5 +83,6 @@ public class Producto {
     public void setDescripcionproducto(String descripcionproducto) {
         this.descripcionproducto = descripcionproducto;
     }
+
 }
 
