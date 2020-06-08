@@ -34,7 +34,7 @@ import java.util.Optional;
 
 
 
-import java.util.Optional;
+
 
 
 @Controller
@@ -47,24 +47,22 @@ public class UsuarioController {
 
     @GetMapping(value = {"", "/"})
 
-    public String nuevo (@ModelAttribute("usuario") Usuario usuario){
-
+    public String nuevo(@ModelAttribute("usuario") Usuario usuario) {
 
 
         return "usuario/nuevo";
     }
 
     @GetMapping("/gestores")
-    public String listagestores (Model model){
+    public String listagestores(Model model) {
         int rol_idrol = 2;
         model.addAttribute("listaGestores", usuarioRepository.obtenerGestores(rol_idrol));
         return "usuario/lista";
     }
 
 
-
     @GetMapping("/lista")
-    public String listarUsuarios(Model model){
+    public String listarUsuarios(Model model) {
         model.addAttribute("listaUsuarios", usuarioRepository.findAll());
         return "Usuario/lista";
 
@@ -77,59 +75,61 @@ public class UsuarioController {
     public String registrarUsuario(@ModelAttribute("usuario") Usuario usuario, Model model,
                                    RedirectAttributes attr) {
 
-        if (usuario.getIdusuario() == 0){
+        if (usuario.getIdusuario() == 0) {
             attr.addFlashAttribute("msg1", "Usuario creado exitosamente");
             usuarioRepository.save(usuario);
             return "redirect:/producto";
-        }else {
+        } else {
             attr.addFlashAttribute("msg1", "Usuario actualizado exitosamente");
             usuarioRepository.save(usuario);
             return "redirect:/producto";
         }
+    }
+
+        @GetMapping("/editar")
+        public String editarUsuario (@ModelAttribute("usuario") Usuario usuario, Model model,
+        @RequestParam("id") int id, RedirectAttributes redirectAttributes){
+            Optional<Usuario> optionalUsuario = usuarioRepository.findById(id);
+            if (optionalUsuario.isPresent()) {
+                usuario = optionalUsuario.get();
+                model.addAttribute("usuario", usuario);
+                return "Usuario/form";
+            } else {
+                return "redirect: /usuario/listar";
+            }
 
 
-    @GetMapping("/editar")
-    public String editarUsuario(@ModelAttribute("usuario") Usuario usuario, Model model, @RequestParam("id") int id, RedirectAttributes redirectAttributes){
-        Optional<Usuario> optionalUsuario = usuarioRepository.findById(id);
-        if(optionalUsuario.isPresent()){
-            usuario = optionalUsuario.get();
-            model.addAttribute("usuario", usuario);
-            return "Usuario/form";
-        } else {
-            return"redirect: /usuario/listar";
+        }
+
+        @Autowired
+        ProductoRepository productoRepository;
+        @GetMapping("/anadirCarrito")
+        public String anadirCarrito ( @RequestParam("id") int idProducto, HttpSession session){
+            ArrayList<Producto> productoCarrito = (ArrayList<Producto>) session.getAttribute("productosCarritoDeCompras");
+            Optional<Producto> producto = productoRepository.findById(idProducto);
+            productoCarrito.add(producto.get());
+            session.setAttribute("productoCarritoDeCompras", productoCarrito);
+            return "redirect:/producto";
+
+        }
+        @GetMapping("/comprar")
+        public String preCompraJuegos (HttpSession session){
+            return "user/compra";
         }
 
 
-    }
+        @GetMapping("/borrar")
+        public String borrar ( @RequestParam("idusuario") int id, RedirectAttributes attr ){
 
-@Autowired
-    ProductoRepository productoRepository;
-    @GetMapping("/anadirCarrito")
-    public String anadirCarrito(@RequestParam("id") int idProducto, HttpSession session){
-        ArrayList<Producto> productoCarrito = (ArrayList<Producto>) session.getAttribute("productosCarritoDeCompras");
-        Optional<Producto> producto = productoRepository.findById(idProducto);
-        productoCarrito.add(producto.get());
-        session.setAttribute("productoCarritoDeCompras",productoCarrito);
-        return "redirect:/producto";
+            Optional<Usuario> borrado = usuarioRepository.findById(id);
 
-    }
-    @GetMapping("/comprar")
-    public String preCompraJuegos(HttpSession session){
-        return "user/compra";
-    }
+            if (borrado.isPresent()) {
+                usuarioRepository.deleteById(id);
+                attr.addFlashAttribute("msg1", "Borrado exitosamente");
+            }
 
-
-    @GetMapping("/borrar")
-    public String borrar (@RequestParam("idusuario") int id, RedirectAttributes attr ){
-
-        Optional<Usuario> borrado = usuarioRepository.findById(id);
-
-        if (borrado.isPresent()){
-            usuarioRepository.deleteById(id);
-            attr.addFlashAttribute("msg1", "Borrado exitosamente");
+            return "producto/listar";
         }
 
-        return "producto/listar";
     }
 
-}
