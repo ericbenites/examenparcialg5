@@ -28,6 +28,7 @@
         <a class="navbar-brand" href="#" th:href="@{/}">LA BATI</a>
 
     </ul>
+
     <li class="nav-item" sec:authorize="hasAuthority('registrado')">
         <a class="nav-link" href="#" th:href="@{/pedidos/list}">Mis pedidos</a>
     </li>
@@ -35,8 +36,10 @@
     <th class="button-column">
         <a th:href="@{/user/comprar}"><i class="glyphicon-shopping-cart"></i></a>
     </th>
+
     <div sec:authorize="isAnonymous()" class="form-inline my-2 my-lg-0">
         <a class="nav-link" th:href="@{/loginForm}">Iniciar Sesión</a>
+
     </div>
 
 

@@ -1,8 +1,12 @@
 package com.example.examenparcialg5.Controllers;
 
+
+import com.example.examenparcialg5.Repository.UsuarioRepository;
+
 import com.example.examenparcialg5.Entity.Producto;
 import com.example.examenparcialg5.Entity.Usuario;
 import com.example.examenparcialg5.Repository.ProductoRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,9 +19,29 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+
+
 @Controller
 @RequestMapping("/usuario")
 public class UsuarioController {
+
+
+    @Autowired
+    UsuarioRepository usuarioRepository;
+
+    @GetMapping(value = {"", "/"})
+    public String nuevo (){
+
+        return "usuario/nuevo";
+    }
+
+
+    @PostMapping("/registrar")
+    public String registrarUsuario(){
+
+//        usuarioRepository.registrarusuario();
+
+        return "algunavista";
 
 @Autowired
     ProductoRepository productoRepository;
@@ -28,6 +52,7 @@ public class UsuarioController {
         productoCarrito.add(producto.get());
         session.setAttribute("productoCarritoDeCompras",productoCarrito);
         return "redirect:/producto";
+
     }
     @GetMapping("/comprar")
     public String preCompraJuegos(HttpSession session){

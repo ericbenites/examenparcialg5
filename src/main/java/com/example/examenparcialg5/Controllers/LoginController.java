@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 @Controller
 public class LoginController {
+
     private final UsuarioRepository usuarioRepository;
 
     @Autowired
@@ -22,10 +23,15 @@ public class LoginController {
         this.usuarioRepository = usuarioRepository;
     }
 
+
     @GetMapping("/loginForm")
     public String loginForm() {
         return "login/login";
     }
+
+    @Autowired
+    UsuarioRepository usuarioRepository;
+
 
     @GetMapping("/redirectByRol")
     public String redirectByRol(Authentication authentication, HttpSession session) {
@@ -42,5 +48,7 @@ public class LoginController {
 
         return "redirect:/producto";
 
+
     }
+
 }
