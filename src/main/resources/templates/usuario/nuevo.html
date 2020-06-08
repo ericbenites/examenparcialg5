@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/leftbar.html :: cabecera(titulo='Registro')">
+</head>
+<body>
+<div class="container padding">
+    <div id="page-wrapper">
+        <div id="page-inner">
+            <div class="col-md-8">
+                <h1>Nuevo usuario</h1>
+            </div>
+            <div class="row">
+
+                    <div class="card">
+                        <div class="container">
+                    <form method="post" th:action="@{'/usuario/registrar'}" th:object="${usuario}">
+
+                        <div class="form-group">
+                            <label for="Nombre">Nombre del usuario</label>
+                            <input type="text" style="width: 88%" class="form-control" th:field="*{nombre}">
+                            <div class="text-danger" th:if="${#fields.hasErrors('nombre')}"
+                                 th:errors="*{nombre}"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Apellido">Apellido del usuario</label>
+                            <input style="width: 88%" type="text" class="form-control" th:field="*{apellido}">
+                            <div class="text-danger" th:if="${#fields.hasErrors('apellido')}"
+                                 th:errors="*{apellido}"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="DNI">DNI del usuario</label>
+                            <input style="width: 88%" type="text" class="form-control" th:field="*{dni}">
+                            <div class="text-danger" th:if="${#fields.hasErrors('dni')}"
+                                 th:errors="*{dni}"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Correo">Correo</label>
+                            <input style="width: 88%" type="text" class="form-control" th:field="*{correo}">
+                            <div class="text-danger" th:if="${#fields.hasErrors('correo')}"
+                                 th:errors="*{correo}"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Contrasena">Contraseña</label>
+                            <input style="width: 88%" type="password" class="form-control"
+                                   th:field="*{contrasena}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="confirmarContraseña">Confirmar contraseña</label>
+                            <input style="width: 88%" type="password" class="form-control"
+                                   th:field="*{confirmarcontrasena}">
+                        </div>
+
+                    </form>
+                        </div>
+                    </div>
+                </div>
+
+    </div>
+</div>
+
+</body>
+</html>

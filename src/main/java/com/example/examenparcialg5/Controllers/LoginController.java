@@ -13,12 +13,14 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 public class LoginController {
+
     private final UsuarioRepository usuarioRepository;
 
     @Autowired
     public LoginController(UsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
     }
+
 
     @GetMapping("/loginForm")
     public String loginForm() {
@@ -39,4 +41,5 @@ public class LoginController {
         return "redirect:/producto";
 
     }
+
 }
