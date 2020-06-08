@@ -30,8 +30,30 @@ public class UsuarioController {
 
 //        usuarioRepository.registrarusuario();
 
-        return "algunavista";
+        return "usuario/lista";
     }
+    @GetMapping("/lista")
+    public String listarUsuarios(Model model){
+        model.addAttribute("listaUsuarios", usuarioRepository.findAll());
+        return "Usuario/lista";
+
+    }
+
+
+    @GetMapping("/editar")
+    public String editarUsuario(@ModelAttribute("usuario") Usuario usuario, Model model, @RequestParam("id") int id, RedirectAttributes redirectAttributes){
+        Optional<Usuario> optionalUsuario = usuarioRepository.findById(id);
+        if(optionalUsuario.isPresent()){
+            usuario = optionalUsuario.get();
+            model.addAttribute("usuario", usuario);
+            return "Usuario/form";
+        } else {
+            return"redirect: /usuario/lista";
+        }
+    }
+
+
+
 
 
 

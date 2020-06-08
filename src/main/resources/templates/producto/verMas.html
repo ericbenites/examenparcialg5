@@ -1,10 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/leftbar.html :: cabecera(titulo='Lista de productos')">
 </head>
 <body>
+<nav th:replace="fragments/leftbar.html :: navbar"></nav>
 
+
+<div id="page-wrapper">
+    <div id="page-inner">
+        <!-- /. COMUNIDAD  -->
+        <div class="row " >
+            <div class="col-md-8 padding">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="table-responsive">r                                                                              ole="alert"></div>
+
+                            <tr th:each="producto, info : ${listaProductos}">
+                                <div class="container">
+                                    <div th:height="1200px" th:width="800px">
+                                        <h3 th:text="${( info.index +1) + (prev)*7}"></h3>
+                                        <h3 th:text="${producto.getCodigoproducto()}"></h3>
+                                        <h3 th:text="${producto.getNombreproducto()}"></h3>
+                                        <h3 th:text="${producto.getPrecio()}"></h3>
+                                        <h3 th:text="${producto.getStock()}"></h3>
+                                        <img th:if="${foto.filename != null }" th:src="@{${'/img/productoFotos/' + foto.filename}}" alt="Photo upload confirmation"/>
+                                    </div>
+                                </div>
+                            </tr>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End  Kitchen Sink -->
+        </div>
+    </div>
+</div>
+</div>
 </body>
+
 </html>
