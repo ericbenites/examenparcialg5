@@ -35,6 +35,7 @@
                             <div class="table-responsive">
                                 <div th:if="${msg != null}" th:text="${msg}" class="alert alert-success"
                                      role="alert"></div>
+
                                 <tr th:each="producto, info : ${listaProductos}">
                                     <div class="container">
                                         <div th:height="1200px" th:width="800px">
@@ -48,6 +49,7 @@
                                     </div>
                                 </tr>
                             </div>
+
                                 <div class="row">
                                     <div class="col-md-4"></div>
                                     <div class="col-md-8">
